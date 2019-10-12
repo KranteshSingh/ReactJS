@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// Importing bootstrap into our application
 import 'bootstrap/dist/css/bootstrap.css';
+// Importing the Counter Component that we have created
 import Counter from './components/counter';
 
 ReactDOM.render(<Counter />, document.getElementById('root'));

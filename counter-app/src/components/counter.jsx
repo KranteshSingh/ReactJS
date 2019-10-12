@@ -1,65 +1,67 @@
+// Importing React Component from react so that we can use functionality of react
+// Our Counter class inheriting some functionality from Component Class from 'react' module
 import React, { Component } from 'react';
 class Counter extends Component {
-  // constructor() {
-  //   super();
-  //   console.log('Constructor', this);
-  //   this.handleIncrement = this.handleIncrement.bind(this);
-  // }
+  // state is a speacial property aka object in React, it includes any data that this component needs
   state = {
-    count: 0,
-    tags: ['tag1', 'tag2', 'tag3']
+    count: 0
   };
 
-  styles = {
-    fontSize: 50,
-    fontWeight: 'bold'
+  style = {
+    fontSize: '15px',
+    textAlign: 'center',
+    marginTop: '30px'
   };
 
-  renderTags() {
-    if (this.state.tags.length === 0) return <p>There are no Tags!</p>;
-
-    return (
-      <ul>
-        {this.state.tags.map(tag => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-    );
+  // Format of the Counter if its 0 then it will display it in Strings
+  formatCount() {
+    const { count } = this.state;
+    return count === 0 ? 'ZERO' : count;
   }
 
-  handleIncrement = product => {
-    console.log('Increment Clicked', this);
-    console.log(product);
+  // Handling Events
+  // Updating the State of Badge
+  handleIncrement = () => {
+    console.log('+1', this);
     this.setState({ count: this.state.count + 1 });
   };
 
+  handleDecrement = () => {
+    this.setState({ count: this.state.count - 1 });
+  };
+
+  // Rendering Classes Dynamically
+  getBadgeClasses() {
+    let classes = 'badge m-2 ';
+    classes += this.state.count === 0 ? 'badge-warning' : 'badge-primary';
+    return classes;
+  }
   render() {
     return (
-      <div>
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <span style={this.styles} className="badge badge-primary m-2">
+      <div style={this.style} className="container">
+        <h1
+          style={{ fontWeight: 'bold', color: 'green', marginBottom: '20px' }}
+        >
+          Kounter Singh
+        </h1>
+        <hr />
+        <span style={{ fontSize: '17px' }} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
-        <button className="btn btn-secondary btn-sm">Click Me</button>
-        {this.state.tags.length === 0 && 'Please create a new tag!'}
-        {this.renderTags()}
-        <button onClick={this.handleIncrement}>HI HANDLE EVENT</button>
-        <button onClick={() => this.handleIncrement({ id: 1 })}>
-          HANDLE EVENT
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-md"
+        >
+          INCREMENT
+        </button>
+        <button
+          onClick={this.handleDecrement}
+          className="btn btn-danger btn-md m-2"
+        >
+          DECREMENT
         </button>
       </div>
     );
-  }
-
-  getBadgeClasses() {
-    let classes = 'badge m-2 badge-';
-    classes += this.state.count === 0 ? 'warning' : 'primary';
-    return classes;
-  }
-
-  formatCount() {
-    const { count } = this.state;
-    return count === 0 ? 'Zero' : count;
   }
 }
 
